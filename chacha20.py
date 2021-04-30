@@ -124,10 +124,10 @@ def chacha(message, key, block_counter=0, nonce=0):
 
 if __name__ == '__main__':
     key = 'jua#vH2(natD<Se3'
-    a = salsa('i made it i can\'t believe it i actually did build chacha and salsa cypher more cipher ahead', key, 392, 623)
+    a = salsa('i made it i can\'t believe it i actually did build chacha and salsa cypher more cipher algorithms ahead', key, 392, 623)
     a = salsa(a, key, 392, 623)
 
-    b = chacha('i made it i can\'t believe it i actually did build chacha and salsa cypher more cipher ahead', key, 392, 623)
+    b = chacha('i made it i can\'t believe it i actually did build chacha and salsa cypher more cipher algorithms ahead', key, 392, 623)
     b = chacha(b, key, 392, 623)
     print(a)
     print(b)
