@@ -73,11 +73,6 @@ def key_generator(encrypt, key, block_counter, nonce):
             s[5], s[6], s[7], s[4] = qr('salsa', s[5], s[6], s[7], s[4])
             s[10], s[11], s[8], s[9] = qr('salsa', s[10], s[11], s[8], s[9])
             s[15], s[12], s[13], s[14] = qr('salsa', s[15], s[12], s[13], s[14])
-        s = [int(a, 16) ^ int(b, 16) for a, b in zip(s, s1)]
-        s = ['0x{:0x}'.format(i) for i in s]
-        a = ''.join(''.join(s).split('0x'))
-        b = ''.join([chr(int(''.join(c), 16)) for c in zip(a[0::2], a[1::2])])
-        return [ord(i) for i in b]
 
     if encrypt == 'chacha':
         s = [c[0], c[1], c[2], c[3],
@@ -101,11 +96,12 @@ def key_generator(encrypt, key, block_counter, nonce):
             s[1], s[6], s[11], s[12] = qr('chacha', s[1], s[6], s[11], s[12])
             s[2], s[7], s[8], s[13] = qr('chacha', s[2], s[7], s[8], s[13])
             s[3], s[4], s[9], s[14] = qr('chacha', s[3], s[4], s[9], s[14])
-        s = [int(a, 16) ^ int(b, 16) for a, b in zip(s, s1)]
-        s = ['0x{:0x}'.format(i) for i in s]
-        a = ''.join(''.join(s).split('0x'))
-        b = ''.join([chr(int(''.join(c), 16)) for c in zip(a[0::2], a[1::2])])
-        return [ord(i) for i in b]
+            
+    s = [int(a, 16) ^ int(b, 16) for a, b in zip(s, s1)]
+    s = ['0x{:0x}'.format(i) for i in s]
+    a = ''.join(''.join(s).split('0x'))
+    b = ''.join([chr(int(''.join(c), 16)) for c in zip(a[0::2], a[1::2])])
+    return [ord(i) for i in b]
 
 
 def salsa(message, key, block_counter=0, nonce=0):
